@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="bootstrap-5.3.2-dist/css/bootstrap.min.css">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css">
+<link rel="stylesheet" href="\style.css">
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    </div>
+
+    <!-- Spinner End -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: rgb(255, 255, 255) !important;">
+        <div class="container-fluid" style="padding-left: 40px; padding-right: 40px;">
+            <a class="navbar-brand" href="#">
+                <img src="\src\main\resources\templates\img\logocheckout.webp" alt="">
+                <span class="divider ms-4" style="width: 600px;">|</span>
+            </a>
+            <h3 class="navbar-text me-auto mt-2">THANH TOÁN</h3>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto me-5 mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: black;" href="#"><i class="fa-regular fa-user"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container p-3">
+        <div class="payment-order" style="position: relative; border: 1px solid rgb(230, 230, 230); height: 55px;">
+            <div class="row d-flex">
+                <div class="col-8 d-flex orders">
+                    <h5 class="ms-3 justify-content-center mt-3">Mã đơn hàng: DH001 </h5>
+                    <i class="fa-solid fa-circle-plus ms-2" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        style="margin-top: 20px; "></i>
+                </div>
+                <div class="col-3 payment ms-auto">
+                    <h5 class="justify-content-center mt-3">Số tiền: 300.000 VNĐ</h5>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Button trigger modal -->
+    <div class="container">
+        <div class="card mt-5">
+            <div class="card-header text-center text-light-info">
+                THÔNG TIN THANH TOÁN
+            </div>
+            <div class="card-body">
+                <div class="row mt-5 d-flex">
+                    <div class="col-md-5 text-center">
+
+                        <h6 class="">Quét mã QR</h6>
+                        <img src="\img\qr.jpg" class="ms-4 mb-4" alt=""
+                            style="width: 370px; height: 350px; justify-content: center;" class="img-fluid">
+                    </div>
+                    <div class="col-md-6 text-center ms-2">
+                        <h5>Thẻ nội địa</h5>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <div class="form-floating mb-2">
+                                    <input type="number" class="form-control" name="card_number" id="card_number"
+                                        placeholder="Số thẻ" required>
+                                    <label for="card_number" class="form-label">Số thẻ</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating mb-2">
+                                    <input type="date" class="form-control" name="expiry_date" id="expiry_date"
+                                        placeholder="Ngày phát hành" required>
+                                    <label for="expiry_date" class="form-label">Ngày phát hành</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating mb-2">
+                                    <input type="text" class="form-control" name="card_name" id="card_name"
+                                        placeholder="Tên in trên thẻ" required>
+                                    <label for="card_name" class="form-label">Tên in trên thẻ</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-grid">
+                                    <button class="btn btn-lg" type="submit"
+                                        style="background-color: rgb(255, 145, 76);">Tiếp tục</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade mt-5" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 " id="exampleModalLabel">Đơn hàng <br>
+                        DH001</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="product-payment">
+                        <table class="table site-block-order-table mb-5">
+
+                            <tbody>
+                                <tr>
+                                    <td class="img-product"><img src="\src\main\resources\templates\upload\sp1.1.webp" alt="" style="width: 64px;">
+
+                                    </td>
+
+                                    <td><strong>Serum chống nắng Hyalu-Cica Water-Fit SPF50+
+                                            PA++++</strong><br>
+                                        <strong>15ml</strong>
+                                    </td>
+                                    <td><strong>x1</strong></td>
+
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <td class="text-black font-weight-bold" colspan="3"><strong>Tổng
+                                        tiền</strong>
+                                </td>
+                                <td class="text-black font-weight-bold" colspan="4">
+                                    <strong>
+                                        300.000VND
+                                    </strong>
+                                </td>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="info-payment">
+                        <h6>Thông tin liên hệ:</h6>
+                        <p>Hotline: 0898382948</p>
+                        <p>Liên hệ: ph1515362@gmail.com</p>
+                        <p>Website: http://127.0.0.1:5500/index.html</p>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer -->
+    <footer class=" footer-contact h-100 mt-5">
+        <div class="container">
+            <div class="row Footer__Inner">
+                <div class="col-md-4" style="margin-top: 30px;">
+                    <h5 class="mb-3">SKIN1004</h5>
+                    <p class="mb-3">Whatever touches the skin must be pure. Let us deliver
+                        you the untouched
+                        nature and its purity to your skin, to help you discover your best
+                        skin.</p>
+                    <p><strong>Customer Service:</strong> hello@skin1004korea.com</p>
+                    <p><strong>Wholesale Inquiry:</strong> sales@skin1004korea.com</p>
+                </div>
+                <div class="col-md-2" style="margin-top: 30px;">
+                    <h5 class="footer-blog mb-3">HELP</h5>
+                    <ul class="listLink-item">
+                        <li class="iconList"><a href="">SKIN1004 Blog</a></li>
+                        <li class="iconList"><a href="">Stores</a></li>
+                        <li class="iconList"><a href="">Become A Partner</a></li>
+                        <li class="iconList"><a href="">FAQs</a></li>
+                        <li class="iconList"><a href="">Contact US</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2" style="margin-top: 30px;">
+                    <h5 class="mb-3">POLICY</h5>
+                    <ul class="listLink-item">
+                        <li class="iconList"><a href="">Shipping Policy</a></li>
+                        <li class="iconList"><a href="">Refund Policy</a></li>
+                        <li class="iconList"><a href="">Privacy Policy</a></li>
+                        <li class="iconList"><a href="">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4" style="margin-top: 30px;">
+                    <h5 class="mb-3">BE THE FIRST TO KNOW</h5>
+                    <p>Stay up to date with our newest releases, exclusive offers, and
+                        giveaways straight to
+                        your inbox.</p>
+                    <form action="">
+                        <input type="text" placeholder="Enter your email address" class="border-0"
+                            style="height: 40px; width: 300px;"><br>
+                        <button class="mt-2 w-50 submit">SUBSCRIBE</button>
+                    </form>
+                </div>
+            </div>
+            <div class="social-list" style="font-size: 35px;">
+                <ul class="social d-flex">
+                    <li class="iconList"><a href=""><i class="fa-brands fa-facebook"></i></a></li>
+                    <li class="iconList"><a href=""><i class="fa-brands fa-instagram"></i></a></li>
+                    <li class="iconList"><a href=""><i class="fa-brands fa-pinterest"></i></a></li>
+                    <li class="iconList"><a href=""><i class="fa-brands fa-twitter"></i></a>
+                    </li>
+                    <li class="iconList"><a href=""><i class="fa-brands fa-youtube"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-aside">
+                <p>
+                    Craver Corporation <br>
+                    CEO: Sohyung Lee <br>
+                    Email: hello@skin1004korea.com <br>
+                    Company Location: Milim tower 12F, 14, Teheran-ro 4-gil, Gangnam-gu,
+                    Seoul, Republic of
+                    Korea
+                    <br>
+                    Company registration number: 261-81-14845 <br>
+                    <br>
+                    © SKIN1004
+                </p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://kit.fontawesome.com/09a7ee35a0.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap 5 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Swiper JavaScript -->
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <!-- JS Link Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+    <script src="/script.js"></script>
+</body>
+
+</html>

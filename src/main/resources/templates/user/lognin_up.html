@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Information Form</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap-5.3.2-dist/css/bootstrap.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css">
+    <link rel="stylesheet" href="\style.css">
+    <style>
+        .sidebar {
+            list-style: none;
+            padding: 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 0;
+        }
+
+        .sidebar li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            position: relative;
+        }
+
+        .sidebar li.active .indicator {
+            display: block;
+        }
+
+        .sidebar li .indicator {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background-color: #28a745;
+            display: none;
+        }
+
+        .form-section {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .form-section+.form-section {
+            margin-top: 20px;
+        }
+
+        .order-history-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .order-history-tabs {
+            display: flex;
+            gap: 15px;
+        }
+
+        .tab-link {
+            color: #888;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .tab-link.active {
+            color: #2d7a32;
+            border-bottom: 2px solid #2d7a32;
+        }
+
+        .order-history-content {
+            display: none;
+        }
+
+        .order-history-content.active-content {
+            display: block;
+        }
+
+        .modal-header {
+            border-bottom: none;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-footer {
+            border-top: none;
+            padding: 1rem 2rem;
+        }
+
+        .btn-save {
+            background-color: #28a745;
+            color: white;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tinhThanhSelect = document.getElementById('tinh-thanh');
+            const quanHuyenSelect = document.getElementById('quan-huyen');
+            const phuongXaSelect = document.getElementById('phuong-xa');
+
+            // Fetch and populate provinces
+            fetch('https://vapi.vnappmob.com/api/province/')
+                .then(response => response.json())
+                .then(data => {
+                    data.results.forEach(province => {
+                        const option = document.createElement('option');
+                        option.value = province.province_id;
+                        option.textContent = province.province_name;
+                        tinhThanhSelect.appendChild(option);
+                    });
+
+                    // Pre-select the current value for province
+                    const selectedProvince = tinhThanhSelect.getAttribute('data-selected');
+                    if (selectedProvince) {
+                        tinhThanhSelect.value = selectedProvince;
+                        tinhThanhSelect.dispatchEvent(new Event('change'));
+                    }
+                })
+                .catch(error => console.error('Error fetching provinces:', error));
+
+            // Fetch and populate districts based on selected province
+            tinhThanhSelect.addEventListener('change', function () {
+                fetch(`https://vapi.vnappmob.com/api/province/district/${this.value}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        quanHuyenSelect.innerHTML = '<option value="">Chọn Quận/Huyện</option>';
+                        data.results.forEach(district => {
+                            const option = document.createElement('option');
+                            option.value = district.district_id;
+                            option.textContent = district.district_name;
+                            quanHuyenSelect.appendChild(option);
+                        });
+
+                        // Pre-select the current value for district
+                        const selectedDistrict = quanHuyenSelect.getAttribute('data-selected');
+                        if (selectedDistrict) {
+                            quanHuyenSelect.value = selectedDistrict;
+                            quanHuyenSelect.dispatchEvent(new Event('change'));
+                        }
+                    })
+                    .catch(error => console.error('Error fetching districts:', error));
+            });
+
+            // Fetch and populate wards based on selected district
+            quanHuyenSelect.addEventListener('change', function () {
+                fetch(`https://vapi.vnappmob.com/api/province/ward/${this.value}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        phuongXaSelect.innerHTML = '<option value="">Chọn Phường/Xã</option>';
+                        data.results.forEach(ward => {
+                            const option = document.createElement('option');
+                            option.value = ward.ward_id;
+                            option.textContent = ward.ward_name;
+                            phuongXaSelect.appendChild(option);
+                        });
+
+                        // Pre-select the current value for ward
+                        const selectedWard = phuongXaSelect.getAttribute('data-selected');
+                        if (selectedWard) {
+                            phuongXaSelect.value = selectedWard;
+                        }
+                    })
+                    .catch(error => console.error('Error fetching wards:', error));
+            });
+
+            // Pre-select the current values if available
+            const selectedCity = tinhThanhSelect.getAttribute('data-selected');
+            const selectedDistrict = quanHuyenSelect.getAttribute('data-selected');
+            const selectedWard = phuongXaSelect.getAttribute('data-selected');
+
+            if (selectedCity) {
+                tinhThanhSelect.value = selectedCity;
+                tinhThanhSelect.dispatchEvent(new Event('change'));
+            }
+
+            if (selectedDistrict) {
+                quanHuyenSelect.value = selectedDistrict;
+                quanHuyenSelect.dispatchEvent(new Event('change'));
+            }
+
+            if (selectedWard) {
+                phuongXaSelect.value = selectedWard;
+            }
+        });
+    </script>
+
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top" data-bs-theme="dark" style="background-color: #896e31;">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav col-md-5 ms-3 text-center justify-content-center">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#!list" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false" style="color: aliceblue;">
+                        THƯƠNG HIỆU
+                    </a>
+                    <ul class="dropdown-menu bg-light">
+                        <ul class="list-unstyled">
+                            <li><a class="dropdown-item" href="#">Nổi bật</a></li>
+                            <li><a class="dropdown-item" href="#pills-sale">Madagascar Centalla</a></li>
+                            <li><a class="dropdown-item" href="#">Hành trình của chúng tôi</a></li>
+                            <li><a class="dropdown-item" href="#">SKIN1004 Blog</a></li>
+                        </ul>
+
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#!list" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false" style="color: aliceblue;">
+                        SẢN PHẨM
+                    </a>
+                    <ul class="dropdown-menu bg-light">
+                        <ul class="list-unstyled">
+                            <li><a class="dropdown-item" href="#pills-sale">Tất cả</a></li>
+                            <li><a class="dropdown-item" href="#pills-sale">Hàng mới</a></li>
+                            <li><a class="dropdown-item" href="#">Sản phẩm tốt</a></li>
+                            <li><a class="dropdown-item" href="#">SET</a></li>
+                        </ul>
+
+
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#!list" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false" style="color: aliceblue;">
+                        BỘ SƯU TẬP
+                    </a>
+                    <ul class="dropdown-menu bg-light">
+                        <ul class="list-unstyled">
+                            <li><a class="dropdown-item" href="#pills-sale">Centella</a></li>
+                            <li><a class="dropdown-item" href="#pills-sale">Hyalu-Cica</a></li>
+                            <li><a class="dropdown-item" href="#pills-sale">Tone Brightening</a></li>
+                            <li><a class="dropdown-item" href="#pills-sale">Poremizing</a></li>
+                            <li><a class="dropdown-item" href="#pills-sale">Tea-Trica</a></li>
+                            <li><a class="dropdown-item" href="#pills-sale">Probio-Cica</a></li>
+                        </ul>
+                    </ul>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav col-md-2 text-center" style="width: 38%; margin-left: 50px;">
+                <a href="#" class="col-md-2 text-center"><img src="img/logo.webp" alt=""></a>
+            </ul>
+            <ul class="navbar-nav col-md-5 text-center d-flex icon justify-content-center" style="margin-right: 20px;">
+                <li class="nav-item">
+                    <a class="btn nav-link" href="#!list" style="color: aliceblue;">CỬA HÀNG</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn nav-link" href="" style="color: aliceblue;">
+                        <i class="fa-regular fa-user"></i>
+                        <p th:text="'Hello, ' + ${userName}"></p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn nav-link" href="" style="color: aliceblue;">
+                        <i class="fa-solid fa-magnifying-glass"></i></a>
+
+
+                </li>
+                <li class="nav-item">
+                    <a class="btn nav-link" href="#!cart" style="color: aliceblue;">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <span class="position-absolute badge-icon top-0 rounded-pill ms-3"
+                            ng-bind="cartCount"></span></a>
+                </li>
+            </ul>
+        </div>
+
+    </nav>
+    <!--End Nav -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-3">
+                <ul class="sidebar" id="sidebar-menu">
+                    <li class="active" data-target="#section1">
+                        <div style="display: flex; align-items: center;">
+                            <i class="fas fa-user" style="color: #28a745; width: 24px; height: 24px;"></i>
+                            <a href="#section1" style="color: #000; text-decoration: none; padding-left: 10px;">Thông
+                                tin cá nhân</a>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color: #000;"></i>
+                        <div class="indicator"></div>
+                    </li>
+                    <li data-target="#section3">
+                        <div style="display: flex; align-items: center;">
+                            <i class="fas fa-map-marker-alt" style="color: #28a745; width: 24px; height: 24px;"></i>
+                            <a href="#section3" style="color: #000; text-decoration: none; padding-left: 10px;">Địa chỉ
+                                của bạn</a>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color: #000;"></i>
+                        <div class="indicator"></div>
+                    </li>
+                    <li data-target="#section4">
+                        <div style="display: flex; align-items: center;">
+                            <i class="fas fa-shopping-cart" style="color: #28a745; width: 24px; height: 24px;"></i>
+                            <a href="#section4" style="color: #000; text-decoration: none; padding-left: 10px;">Đơn
+                                hàng</a>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color: #000;"></i>
+                        <div class="indicator"></div>
+                    </li>
+                    <li data-target="#section8">
+                        <div style="display: flex; align-items: center;">
+                            <i class="fas fa-sign-out-alt" style="color: #28a745; width: 24px; height: 24px;"></i>
+                            <a href="#section8" style="color: #000; text-decoration: none; padding-left: 10px;">Đăng
+                                xuất</a>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color: #000;"></i>
+                        <div class="indicator"></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-9">
+                <div id="section1" class="form-section">
+                    <h4 style="margin-bottom: 20px;">Thông tin cá nhân</h4>
+                    <form action="#" th:action="@{/profile/{userId}(userId=${account.userID})}" th:object="${account}"
+                        method="post">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="ho">Họ</label>
+                                <input type="text" class="form-control" id="ho" th:field="*{firstName}">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="ten">Tên</label>
+                                <input type="text" class="form-control" id="ten" th:field="*{lastName}">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="so-dien-thoai">Số điện thoại</label>
+                                <input type="tel" class="form-control" id="so-dien-thoai" th:field="*{phoneNumber}">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" th:field="*{email}">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="gioi-tinh">Giới tính</label>
+                                <select class="form-control" id="gioi-tinh">
+                                    <option value="Nam">Nam</option>
+                                    <option value="Nữ">Nữ</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="ngay-sinh">Ngày sinh</label>
+                                <input type="date" class="form-control" id="ngay-sinh">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="tinh-thanh">Tỉnh/Thành phố</label>
+                                <select class="form-control" id="tinh-thanh" name="tinh-thanh"
+                                    th:data-selected="${selectedCity}">
+                                    <option value="">Chọn Tỉnh/Thành phố</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="quan-huyen">Quận/Huyện</label>
+                                <select class="form-control" id="quan-huyen" name="quan-huyen"
+                                    th:data-selected="${selectedDistrict}">
+                                    <option value="">Chọn Quận/Huyện</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="phuong-xa">Phường/Xã</label>
+                                <select class="form-control" id="phuong-xa" name="phuong-xa"
+                                    th:data-selected="${selectedWard}">
+                                    <option value="">Chọn Phường/Xã</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="dia-chi-chi-tiet">Địa chỉ chi tiết</label>
+                                <input type="text" class="form-control" id="dia-chi-chi-tiet"
+                                    th:field="*{address[0].address}">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-save">Lưu thay đổi</button>
+                    </form>
+
+                </div>
+                <div id="section2" class="form-section" style="display: none;">
+                    <h4 style="margin-bottom: 20px;">Khách hàng thành viên</h4>
+                    <!-- Nội dung phần Khách hàng thành viên -->
+                </div>
+                <div id="section3" class="form-section" style="display: none;">
+                    <h4 style="margin-bottom: 20px;">Số địa chỉ</h4>
+                    <p>Bạn có <strong>0 địa chỉ</strong></p>
+                    <a href="#" style="color: #28a745;" data-bs-toggle="modal" data-bs-target="#exampleModal">Thêm địa
+                        chỉ
+                        mới</a>
+                </div>
+                <div id="section4" class="form-section" style="display: none;">
+                    <div class="container mt-1">
+                        <h4 style="color: #2d7a32;">Lịch sử đơn hàng</h4>
+                        <div class="order-history-nav">
+                            <div class="order-history-tabs">
+                                <a href="#" class="tab-link active" data-target="#chothanhtoan">Chờ thanh toán</a>
+                                <a href="#" class="tab-link" data-target="#donhangmoi">Đơn hàng mới</a>
+                                <a href="#" class="tab-link" data-target="#dangxuly">Đang xử lý</a>
+                                <a href="#" class="tab-link" data-target="#danggiao">Đang giao</a>
+                                <a href="#" class="tab-link" data-target="#hoanthanh">Hoàn thành</a>
+                                <a href="#" class="tab-link" data-target="#huy">Hủy</a>
+                            </div>
+                        </div>
+                        <div id="chothanhtoan" class="order-history-content text-center active-content"></div>
+                        <div id="donhangmoi" class="order-history-content text-center" style="display: none;"></div>
+                        <!-- Repeat similar divs for other tabs -->
+                        <div id="dangxuly" class="order-history-content text-center" style="display: none;"></div>
+                        <div id="danggiao" class="order-history-content text-center" style="display: none;"></div>
+                        <div id="hoanthanh" class="order-history-content text-center" style="display: none;"></div>
+                        <div id="huy" class="order-history-content text-center" style="display: none;"></div>
+                    </div>
+                </div>
+                <div id="section8" class="form-section" style="display: none;">
+                    <h4 style="margin-bottom: 20px;">Đăng xuất</h4>
+                    <!-- Nội dung phần Đăng xuất -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="border-bottom: none;">
+                    <h5 class="modal-title" id="addressModalLabel"
+                        style="font-size: 1.25rem; font-weight: bold; color: #2d7a32;">Thêm địa chỉ giao hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="padding: 2rem;">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="ho-modal" style="font-weight: 600;">Họ</label>
+                                <input type="text" class="form-control" id="ho-modal" name="ho-modal">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="ten-modal" style="font-weight: 600;">Tên</label>
+                                <input type="text" class="form-control" id="ten-modal" name="ten-modal">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="so-dien-thoai-modal" style="font-weight: 600;">Số điện thoại</label>
+                                <input type="tel" class="form-control" id="so-dien-thoai-modal"
+                                    name="so-dien-thoai-modal">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="tinh-thanh-modal" style="font-weight: 600;">Tỉnh/Thành phố</label>
+                                <select class="form-control" id="tinh-thanh-modal" name="tinh-thanh-modal">
+                                    <option>Chọn Tỉnh/Thành phố</option>
+                                    <option>Hồ Chí Minh</option>
+                                    <option>Hà Nội</option>
+                                    <!-- Các tỉnh/thành phố khác -->
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="quan-huyen-modal" style="font-weight: 600;">Quận/Huyện</label>
+                                <select class="form-control" id="quan-huyen-modal" name="quan-huyen-modal">
+                                    <option>Chọn Quận/Huyện</option>
+                                    <!-- Các quận/huyện khác -->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="phuong-xa-modal" style="font-weight: 600;">Phường/Xã</label>
+                                <select class="form-control" id="phuong-xa-modal" name="phuong-xa-modal">
+                                    <option>Chọn Phường/Xã</option>
+                                    <!-- Các phường/xã khác -->
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="dia-chi-chi-tiet-modal" style="font-weight: 600;">Địa chỉ</label>
+                                <input type="text" class="form-control" id="dia-chi-chi-tiet-modal"
+                                    name="dia-chi-chi-tiet-modal">
+                            </div>
+                        </div>
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="default-address-modal">
+                            <label class="form-check-label" for="default-address-modal">Đặt làm địa chỉ mặc định</label>
+                        </div>
+                        <div class="modal-footer" style="border-top: none; padding: 1rem 2rem;">
+                            <button type="submit" class="btn btn-save"
+                                style="background-color: #28a745; color: white; width: 100%;">Thêm địa chỉ</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <!-- footer -->
+    <footer class="footer-contact">
+        <div class="container">
+            <div class="row Footer__Inner">
+                <div class="col-md-4 " style="margin-top: 30px;">
+
+                    <h5 class="mb-3">SKIN1004</h5>
+                    <p class="mb-3">Whatever touches the skin must be pure. Let us
+                        deliver you the untouched nature and its purity to your skin, to
+                        help you discover your best skin.</p>
+                    <p>
+                        <strong>Customer Service:</strong> hello@skin1004korea.com
+                    </p>
+                    <p>
+                        <strong>Wholesale Inquiry:</strong> sales@skin1004korea.com
+                    </p>
+                </div>
+                <div class="col-md-2" style="margin-top: 30px;">
+                    <h5 class="footer-blog mb-3">HELP</h5>
+                    <ul class="listLink-item">
+                        <li class="iconList"><a href="">SKIN1004 Blog</a></li>
+                        <br>
+                        <li class="iconList"><a href="">Stores</a></li>
+                        <br>
+                        <li class="iconList"><a href="">Become A Partner</a></li>
+                        <br>
+                        <li class="iconList"><a href="">FAQs</a></li>
+                        <br>
+                        <li class="iconList"><a href="">Contact US</a></li>
+                        <br>
+                    </ul>
+                </div>
+                <div class="col-md-2 " style="margin-top: 30px;">
+                    <h5 class="mb-3">POLICY</h5>
+                    <ul class="listLink-item">
+                        <li class="iconList"><a href="">Shipping Policy</a></li>
+                        <li class="iconList"><a href="">Refund Policy</a></li>
+                        <li class="iconList"><a href="">Privacy Policy</a></li>
+                        <li class="iconList"><a href="">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4" style="margin-top: 30px;">
+                    <h5 class="mb-3">BE THE FIRST TO KNOW</h5>
+                    <p>Stay up to date with our newest releases, exclusive offers,
+                        and giveaways straight to your inbox.</p>
+                    <form action="">
+                        <input type="text" placeholder="Enter your email address" class="border-0"
+                            style="height: 40px; width: 300px;"> <br>
+                        <button class="mt-2 w-50 submit">SUBSCRIBE</button>
+                    </form>
+                </div>
+            </div>
+            <div class="social-list" style="font-size: 35px;">
+                <ul class="social d-flex">
+                    <li class="iconList"><a href=""><i class="fa-brands fa-facebook"></i></a></li>
+                    <li class="iconList"><a href=""><i class="fa-brands fa-instagram"></i></a></li>
+                    <li class="iconList"><a href=""><i class="fa-brands fa-pinterest"></i></a></li>
+                    <li class="iconList"><a href=""><i class="fa-brands fa-twitter"></i></a></li>
+                    <li class="iconList"><a href=""><i class="fa-brands fa-youtube"></i></a></li>
+                </ul>
+            </div>
+            <div class="footer-aside mb-5">
+                <p>
+                    Craver Corporation <br> CEO: Sohyung Lee <br> Email:
+                    hello@skin1004korea.com <br> Company Location: Milim tower
+                    12F, 14, Teheran-ro 4-gil, Gangnam-gu, Seoul, Republic of Korea <br>
+                    Company registration number: 261-81-14845 <br> <br> ©
+                    SKIN1004
+                </p>
+            </div>
+        </div>
+
+    </footer>
+
+    <script src="https://kit.fontawesome.com/09a7ee35a0.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap 5 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Swiper JavaScript -->
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <!-- JS Link Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+    <script src="/script.js"></script>
+
+</body>
+
+</html>

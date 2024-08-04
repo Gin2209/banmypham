@@ -1,0 +1,37 @@
+<svg viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" data-name="레이어 1" id="_레이어_1">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke: #abba72;
+      }
+
+      .cls-1, .cls-2 {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2px;
+      }
+
+      .cls-2 {
+        stroke: #000;
+      }
+
+      .cls-3 {
+        fill: #000;
+        stroke-width: 0px;
+      }
+    </style>
+  </defs>
+  <path d="M50,18c17.6,0,32,14.4,32,32s-14.4,32-32,32-32-14.4-32-32,14.4-32,32-32M50,16c-18.8,0-34,15.2-34,34s15.2,34,34,34,34-15.2,34-34-15.2-34-34-34h0Z" class="cls-3"></path>
+  <line y2="58.3" x2="77.1" y1="58.3" x1="56.4" class="cls-2"></line>
+  <line y2="58.3" x2="43.1" y1="58.3" x1="23.1" class="cls-2"></line>
+  <line y2="52.3" x2="35.4" y1="40.8" x1="27.8" class="cls-2"></line>
+  <path d="M42.1,49.3l-6-18" class="cls-2"></path>
+  <path d="M57.1,49.3l6-18" class="cls-2"></path>
+  <line y2="51.5" x2="63.6" y1="42.3" x1="71.1" class="cls-2"></line>
+  <path d="M63.1,32.3" class="cls-1"></path>
+  <path d="M57.1,49.3" class="cls-1"></path>
+  <line y2="48.3" x2="50.1" y1="25.3" x1="50.1" class="cls-2"></line>
+  <path d="M42.7,57.5" class="cls-1"></path>
+  <path d="M43.1,58.3c2.8-5.4,10.5-5.3,13.3,0" class="cls-2"></path>
+</svg>

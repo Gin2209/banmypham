@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="bootstrap-5.3.2-dist/css/bootstrap.min.css">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css">
+<link rel="stylesheet" href="\style.css">
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    </div>
+    <!-- Spinner End -->
+    <nav class="navbar navbar-expand-lg" data-bs-theme="dark" style="background-color: #ffffff !important;">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav col-md-5 ms-3 text-center justify-content-center">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#!list" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false" style="color: rgb(0, 0, 0);">
+                        THƯƠNG HIỆU
+                    </a>
+                    <ul class="dropdown-menu bg-light">
+                        <ul class="list-unstyled">
+                            <li><a class="dropdown-item" href="#">Nổi bật</a></li>
+                            <li><a class="dropdown-item" href="#pills-sale">Madagascar Centalla</a></li>
+                            <li><a class="dropdown-item" href="#">Hành trình của chúng tôi</a></li>
+                            <li><a class="dropdown-item" href="#">SKIN1004 Blog</a></li>
+                        </ul>
+
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#!list" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false" style="color: rgb(0, 0, 0);">
+                        SẢN PHẨM
+                    </a>
+                    <ul class="dropdown-menu bg-light">
+                        <ul class="list-unstyled">
+                            <li><a class="dropdown-item" style=" font-weight: bold;
+                                        font-size: 1.2em;
+                                        color: #000;" href="#">Nổi bật</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#pills-sale">Tất cả</a></li>
+                            <li><a class="dropdown-item" href="#pills-sale">Hàng mới</a></li>
+                            <li><a class="dropdown-item" href="#">Sản phẩm tốt</a></li>
+                            <li><a class="dropdown-item" href="#">SET</a></li>
+                        </ul>
+                        <ul class="list-unstyled">
+                            <li><a class="dropdown-item" style=" font-weight: bold;
+                                        font-size: 1.2em;
+                                        color: #000;" href="#">Loại sản phẩm</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="list.html">Sửa rửa mặt</a></li>
+                            <li><a class="dropdown-item" href="list.html">Toner/Mist</a></li>
+                            <li><a class="dropdown-item" href="list.html">Serum</a></li>
+                            <li><a class="dropdown-item" href="list.html">Kem dưỡng ẩm</a></li>
+                            <li><a class="dropdown-item" href="list.html">Kem chống nắng</a></li>
+                            <li><a class="dropdown-item" href="list.html">Mặt nạ</a></li>
+                            <li><a class="dropdown-item" href="list.html">Chăm sóc đặc biệt</a></li>
+                        </ul>
+                        <ul class="list-unstyled">
+                            <li><a class="dropdown-item" style=" font-weight: bold;
+                                        font-size: 1.2em;
+                                        color: #000;" href="#">Loại da</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#!list.html">Nhạy cảm</a></li>
+                            <li><a class="dropdown-item" href="list.html">Da khô</a></li>
+                            <li><a class="dropdown-item" href="list.html">Tổ hợp</a></li>
+                            <li><a class="dropdown-item" href="list.html">Da dầu</a></li>
+                            <li><a class="dropdown-item" href="list.html">Da mụn</a></li>
+                        </ul>
+                        <ul class="list-unstyled">
+                            <li><a class="dropdown-item" style=" font-weight: bold;
+                                        font-size: 1.2em;
+                                        color: #000;" href="#">Bộ sưu tập</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#!list.html">Rau má</a></li>
+                            <li><a class="dropdown-item" href="list.html">Hyalu-cica</a></li>
+                            <li><a class="dropdown-item" href="list.html">Làm sáng tông da</a></li>
+                            <li><a class="dropdown-item" href="list.html">Poremizing</a></li>
+                            <li><a class="dropdown-item" href="list.html">Trà-Trica</a></li>
+                            <li><a class="dropdown-item" href="list.html">Probio-Cica</a></li>
+
+                        </ul>
+                        <ul class="list-unstyled">
+                            <li><a class="dropdown-item" style=" font-weight: bold;
+                                        font-size: 1.2em;
+                                        color: #000;" href="#">Chức năng</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#!list.html">Chống nhăn</a></li>
+                            <li><a class="dropdown-item" href="list.html">Calming</a></li>
+                            <li><a class="dropdown-item" href="list.html">Dưỡng ẩm</a></li>
+                            <li><a class="dropdown-item" href="list.html">Giảm đốm đen</a></li>
+                            <li><a class="dropdown-item" href="list.html">Se khít lỗ chân lông</a></li>
+                            <li><a class="dropdown-item" href="list.html">Nourishing</a></li>
+                            <li><a class="dropdown-item" href="list.html">Tẩy tế bào chết</a></li>
+                            <li><a class="dropdown-item" href="list.html">Khôi phục da</a></li>
+                            <li><a class="dropdown-item" href="list.html">Mụn trứng ca/ Khuyết điểm</a></li>
+                            <li><a class="dropdown-item" href="list.html">Sun care</a></li>
+                            <li><a class="dropdown-item" href="list.html">Tone-up</a></li>
+                        </ul>
+
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#!list" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false" style="color: rgb(0, 0, 0);">
+                        FLAGSHIP
+                    </a>
+                    <ul class="dropdown-menu bg-light">
+                        <ul class="list-unstyled">
+                            <li><a class="dropdown-item" href="#pills-sale">Kinh nghiệm</a></li>
+                            <li><a class="dropdown-item" href="#pills-sale">Kiểm tra da</a></li>
+                        </ul>
+                    </ul>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav col-md-2 text-center" style="width: 38%; margin-left: 50px;">
+                <a href="#" class="col-md-2 text-center"><img src="/src/main/resources/templates/img/logo2.webp" alt=""></a>
+            </ul>
+            <ul class="navbar-nav col-md-5 text-center d-flex icon justify-content-center" style="margin-right: 20px;">
+                <li class="nav-item">
+                    <a class="btn nav-link" href="#!list" style="color: rgb(0, 0, 0);">CỬA HÀNG</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn nav-link" href="" style="color: rgb(0, 0, 0);">
+                        <i class="fa-regular fa-user"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn nav-link" href="" style="color: rgb(0, 0, 0);">
+                        <i class="fa-solid fa-magnifying-glass"></i></a>
+
+
+                </li>
+                <li class="nav-item">
+                    <a class="btn nav-link" href="#!cart" style="color: rgb(0, 0, 0);">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <span class="position-absolute badge-icon top-0 rounded-pill ms-3"
+                            ng-bind="cartCount"></span></a>
+                </li>
+            </ul>
+        </div>
+
+    </nav>
+    <!--End Nav -->
+    <div class="cart">
+        <div class="container">
+            <h3 class="text-center mt-5 mb-0">GIỎ HÀNG CỦA BẠN</h3>
+        </div>
+        <div class="shoppin-cart">
+            <div class="pay before-footer-section">
+                <div class="container">
+                    <div class="row mb-5">
+                        <form class="col-md-12" method="post">
+                            <div class="site-blocks-table">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th class="product-name">Sản phẩm</th>
+                                            <th class="product-price"> Giá tiền </th>
+                                            <th class="product-quantity">Số lượng</th>
+                                            <th class="product-total">Thành tiền</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="product-name">
+                                                <input type="checkbox" name="selectedItems" value="${item.spham.masp}"
+                                                    class="form-check-input">
+
+                                            </td>
+                                            <td>
+                                                <div class="card mb-3 rounded-0 border-0" style="max-width: 540px;">
+                                                    <div class="row g-0">
+
+                                                        <div class="col-md-4">
+                                                            <img src="upload/sp1.webp" class="img-fluid rounded-start"
+                                                                alt="..." style="width: 100%; height: 100%;">
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">
+                                                                    Serum chống nắng Hyalu-Cica Water-Fit SPF50+ PA++++
+                                                                </h5>
+                                                                <p class="card-volume">
+                                                                    <strong>15ml</strong>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p class="card-price">
+                                                    <fmt:formatNumber value="${item.size.gia}" minFractionDigits="0"
+                                                        maxFractionDigits="0" />300.000 VNĐ
+                                                </p>
+                                            </td>
+                                            <td class="justify-content-center">
+                                                <div class="input-group quantity-controls">
+                                                    <div class="input-group-prepend">
+                                                        <a href="/cart/update/${item.spham.masp}/minus" class="btn"
+                                                            style="border: none;">-</a>
+                                                    </div>
+                                                    <input type="number" value="1" aria-label="Quantity"
+                                                        style="width: 50px; text-align: center; border: none;">
+                                                    <div class="input-group-append">
+                                                        <a href="/cart/update/${item.spham.masp}/plus" class="btn"
+                                                            style="border: none; ">+</a>
+                                                    </div>
+                                                </div>
+                                                <a href="" class="remove-link text-center">REMOVE</a>
+                                            </td>
+                                            <td>
+                                                <span>300.000 VNĐ</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row mb-5">
+                                <div class="col-md-6 mb-3">
+                                    <a href="list.html" class="btn btn-danger border-0 rounded-0">Tiếp
+                                        tục mua sắm</a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 pl-5">
+                            <div class="row justify-content-end">
+                                <div class="col-md-7">
+                                    <div class="row">
+                                        <div class="col-md-12 text-right border-bottom mb-5">
+                                            <h3 class="text-black h4 text-uppercase">Tổng tiền</h3>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-5">
+                                        <div class="col-md-6">
+                                            <span class="text-black">Tổng tiền</span>
+                                        </div>
+                                        <div class="col-md-6 text-right">
+                                            <strong class="text-black">
+                                                300.000VND
+                                            </strong>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <a class="btn checkout" href="checkout.html">CHECK OUT</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end cart -->
+    <hr>
+    <!-- list product -->
+    <div class="people-aslo">
+        <div class="row gy-4 d-flex ms-4 me-1">
+            <div class="col-md-3 d-flex">
+                <div class="card border-0">
+                    <a href="#!">
+
+                        <div class="hover-overlay">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </div>
+                    </a>
+                    <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light product-image-container"
+                        data-mdb-ripple-color="light" style="height: 320px; position: relative;">
+                        <a href=""> <img src="/img/trica-cream.webp" class="w-100 product-image"
+                                style="width: 100%; height: 100%; display: block; transition: opacity 0.3s ease;" />
+                            <img src="/img/trica-cream2.webp" class="w-100 product-hover-image"
+                                style="width: 100%; height: 100%; display: block; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.3s ease;" />
+                            <h5>
+                                <span class="badge">ON SALE</span>
+                            </h5>
+                        </a> <a href="#" class="quick-add"
+                            style="position: absolute; bottom: -40px; left: 0; width: 100%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #FFFFFF; opacity: 0; transition: opacity 0.3s ease, bottom 0.3s ease; text-decoration: none;">QUICK
+                            ADD</a>
+                    </div>
+                    <br>
+                    <div class="card-body">
+                        <a href="" class="text-reset" style="text-decoration: none;">
+                            <h5 class="card-title mb-3">TEA-TRICA SPOT CREAM</h5>
+                        </a> <a href="" class="text-reset"> </a>
+                        <h6 class="mb-3" style="color: rgb(184, 144, 84);">
+                            $61.99
+                            <del style="text-decoration: line-through;">$70</del>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex">
+                <div class="card border-0">
+                    <a href="#!">
+
+                        <div class="hover-overlay">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </div>
+                    </a>
+                    <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light product-image-container"
+                        data-mdb-ripple-color="light" style="height: 320px; position: relative;">
+                        <a href=""> <img src="/img/creamt-tricab5.webp" class="w-100 product-image"
+                                style="width: 100%; height: 100%; display: block; transition: opacity 0.3s ease;" />
+                            <img src="/img/creamt-tricab5-2.webp" class="w-100 product-hover-image"
+                                style="width: 100%; height: 100%; display: block; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.3s ease;" />
+                            <h5>
+                                <span class="badge">ON SALE</span>
+                            </h5>
+                        </a> <a href="#" class="quick-add"
+                            style="position: absolute; bottom: -40px; left: 0; width: 100%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #FFFFFF; opacity: 0; transition: opacity 0.3s ease, bottom 0.3s ease; text-decoration: none;">QUICK
+                            ADD</a>
+                    </div>
+                    <br>
+                    <div class="card-body">
+                        <a href="" class="text-reset">
+                            <h5 class="card-title">Tea-Trica B5 Cream</h5>
+                        </a> <a href="" class="text-reset"> <i class="fa-solid fa-star" style="color: #886720;"></i> <i
+                                class="fa-solid fa-star" style="color: #886720;"></i> <i class="fa-solid fa-star"
+                                style="color: #886720;"></i> <i class="fa-solid fa-star" style="color: #886720;"></i> <i
+                                class="fa-solid fa-star" style="color: #7b7b6f;"></i>
+                        </a>
+                        <h6 class="mb-3" style="color: rgb(184, 144, 84);">
+                            $61.99
+                            <del style="text-decoration: line-through;">$70</del>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex">
+                <div class="card border-0">
+                    <a href="#!">
+                        <div class="hover-overlay">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </div>
+                    </a>
+                    <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light product-image-container"
+                        data-mdb-ripple-color="light" style="height: 320px; position: relative;">
+                        <a href=""> <img src="/img/probio.webp" class="w-100 product-image"
+                                style="width: 100%; height: 100%; display: block; transition: opacity 0.3s ease;" />
+                            <img src="/img/probio-2.webp" class="w-100 product-hover-image"
+                                style="width: 100%; height: 100%; display: block; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.3s ease;" />
+                            <h5>
+                                <span class="badge">ON SALE</span>
+                            </h5>
+                        </a> <a href="#" class="quick-add"
+                            style="position: absolute; bottom: -40px; left: 0; width: 100%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #FFFFFF; opacity: 0; transition: opacity 0.3s ease, bottom 0.3s ease; text-decoration: none;">QUICK
+                            ADD</a>
+                    </div>
+                    <br>
+                    <div class="card-body">
+                        <a href="" class="text-reset">
+                            <h5 class="card-title">PROBIO-CICA ENRICH CREAM</h5>
+                        </a> <a href="" class="text-reset"> <i class="fa-solid fa-star" style="color: #886720;"></i> <i
+                                class="fa-solid fa-star" style="color: #886720;"></i> <i class="fa-solid fa-star"
+                                style="color: #886720;"></i> <i class="fa-solid fa-star" style="color: #886720;"></i> <i
+                                class="fa-regular fa-star-half-stroke" style="color: #886720;"></i>
+                        </a>
+                        <h6 class="mb-3" style="color: rgb(184, 144, 84);">
+                            $61.99
+                            <del style="text-decoration: line-through;">$70</del>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex">
+                <div class="card border-0">
+                    <a href="#!">
+                        <div class="mask" style="margin-top: 10px;">
+                            <div class="d-flex justify-content-start align-items-end h-100">
+
+                            </div>
+                        </div>
+                        <div class="hover-overlay">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </div>
+                    </a>
+                    <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light product-image-container"
+                        data-mdb-ripple-color="light" style="height: 320px; position: relative;">
+                        <a href=""> <img src="/img/sun.webp" class="w-100 product-image"
+                                style="width: 100%; height: 100%; display: block; transition: opacity 0.3s ease;" />
+                            <img src="/img/sun2.webp" class="w-100 product-hover-image"
+                                style="width: 100%; height: 100%; display: block; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.3s ease;" />
+                            <h5>
+                                <span class="badge">ON SALE</span>
+                            </h5>
+                        </a> <a href="#" class="quick-add"
+                            style="position: absolute; bottom: -40px; left: 0; width: 100%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #FFFFFF; opacity: 0; transition: opacity 0.3s ease, bottom 0.4s ease; text-decoration: none;">QUICK
+                            ADD</a>
+                    </div>
+                    <br>
+                    <div class="card-body">
+                        <a href="" class="text-reset">
+                            <h5 class="card-title">Hyalu-Cica Silky-Fit Sun Stick</h5>
+                        </a> <a href="" class="text-reset"> <i class="fa-solid fa-star" style="color: #886720;"></i> <i
+                                class="fa-solid fa-star" style="color: #886720;"></i> <i class="fa-solid fa-star"
+                                style="color: #886720;"></i> <i class="fa-solid fa-star" style="color: #886720;"></i> <i
+                                class="fa-regular fa-star-half-stroke" style="color: #886720;"></i>
+                        </a>
+                        <h6 class="mb-3" style="color: rgb(184, 144, 84);">
+                            $61.99
+                            <del style="text-decoration: line-through;">$70</del>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end -->
+
+    <!-- footer -->
+    <footer class=" footer-contact h-100 mt-5">
+        <div class="container">
+            <div class="row Footer__Inner">
+                <div class="col-md-4" style="margin-top: 30px;">
+                    <h5 class="mb-3">SKIN1004</h5>
+                    <p class="mb-3">Whatever touches the skin must be pure. Let us deliver
+                        you the untouched
+                        nature and its purity to your skin, to help you discover your best
+                        skin.</p>
+                    <p><strong>Customer Service:</strong> hello@skin1004korea.com</p>
+                    <p><strong>Wholesale Inquiry:</strong> sales@skin1004korea.com</p>
+                </div>
+                <div class="col-md-2" style="margin-top: 30px;">
+                    <h5 class="footer-blog mb-3">HELP</h5>
+                    <ul class="listLink-item">
+                        <li class="iconList"><a href="">SKIN1004 Blog</a></li>
+                        <li class="iconList"><a href="">Stores</a></li>
+                        <li class="iconList"><a href="">Become A Partner</a></li>
+                        <li class="iconList"><a href="">FAQs</a></li>
+                        <li class="iconList"><a href="">Contact US</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2" style="margin-top: 30px;">
+                    <h5 class="mb-3">POLICY</h5>
+                    <ul class="listLink-item">
+                        <li class="iconList"><a href="">Shipping Policy</a></li>
+                        <li class="iconList"><a href="">Refund Policy</a></li>
+                        <li class="iconList"><a href="">Privacy Policy</a></li>
+                        <li class="iconList"><a href="">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4" style="margin-top: 30px;">
+                    <h5 class="mb-3">BE THE FIRST TO KNOW</h5>
+                    <p>Stay up to date with our newest releases, exclusive offers, and
+                        giveaways straight to
+                        your inbox.</p>
+                    <form action="">
+                        <input type="text" placeholder="Enter your email address" class="border-0"
+                            style="height: 40px; width: 300px;"><br>
+                        <button class="mt-2 w-50 submit">SUBSCRIBE</button>
+                    </form>
+                </div>
+            </div>
+            <div class="social-list" style="font-size: 35px;">
+                <ul class="social d-flex">
+                    <li class="iconList"><a href=""><i class="fa-brands fa-facebook"></i></a></li>
+                    <li class="iconList"><a href=""><i class="fa-brands fa-instagram"></i></a></li>
+                    <li class="iconList"><a href=""><i class="fa-brands fa-pinterest"></i></a></li>
+                    <li class="iconList"><a href=""><i class="fa-brands fa-twitter"></i></a>
+                    </li>
+                    <li class="iconList"><a href=""><i class="fa-brands fa-youtube"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-aside">
+                <p>
+                    Craver Corporation <br>
+                    CEO: Sohyung Lee <br>
+                    Email: hello@skin1004korea.com <br>
+                    Company Location: Milim tower 12F, 14, Teheran-ro 4-gil, Gangnam-gu,
+                    Seoul, Republic of
+                    Korea
+                    <br>
+                    Company registration number: 261-81-14845 <br>
+                    <br>
+                    © SKIN1004
+                </p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://kit.fontawesome.com/09a7ee35a0.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap 5 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Swiper JavaScript -->
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <!-- JS Link Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+    <script src="/script.js"></script>
+</body>
+
+</html>
